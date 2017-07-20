@@ -11,18 +11,42 @@
         http://www.springframework.org/schema/mvc
         http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
-    <!-- 启用注解驱动的 Spring MVC -->
-    <mvc:annotation-driven/>
+    <!-- 配置注解驱动的 Spring MVC 控制器编程模型 -->
+    <!-- 注意，该标记仅在 Web MVC 中起作用，在 Portlet MVC 中不行 -->
+    <mvc:annotation-driven>
+        <!-- 配置 HttpMessageConverter 类型，用于 @RequestBody 方法参数和 @ResponseBody 方法返回值 -->
+        <mvc:message-converters>
+            <!-- 使用 Jackson 2.x 的 ObjectMapper 读写 JSON 类型 HTTP信息 -->
+            <!-- 默认情况下，该转换器支持 UTF-8 字符集的 application/json 和 application/*+json -->
+            <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"/>
+            <!-- 读写字符串类型 HTTP 信息 -->
+            <!-- 默认情况下，该转换器支持所有媒体类型，写纯文本，默认字符集 ISO-8859-1 -->
+            <bean class="org.springframework.http.converter.StringHttpMessageConverter">
+                <!-- 设置该转换器支持的媒体类型 -->
+                <property name="supportedMediaTypes">
+                    <list>
+                        <!-- 无格式正文（纯文本） -->
+                        <value>text/plain;charset=UTF-8</value>
+                        <!-- HTML格式正文 -->
+                        <value>text/html;charset=UTF-8</value>
+                    </list>
+                </property>
+            </bean>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
 
     <!-- 启用组件扫描：扫描 base-package 及其子包下带有 @Component 注解的类 -->
-    <!-- 该注解必须位于 <mvc:annotation-driven/> 之后，否则无法扫描 Web 注解 -->
+    <!-- 该配置必须位于 <mvc:annotation-driven> 之后，否则无法扫描 Spring MVC 注解 -->
     <context:component-scan base-package="com.kongzhu.demo.springmvc"/>
+
+    <!-- 配置用于服务静态资源（如 image、js）的处理程序，以及优化具有缓存头的css文件，以便在 Web 浏览器中高效加载 -->
+    <mvc:resources location="/resources/" mapping="/resources/**"/>
 
     <!-- 配置视图解析器 -->
     <!-- InternalResourceViewResolver - 将视图解析为 Web 应用的内部资源（一般为 JSP） -->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-      <property name="prefix" value="/WEB-INF/views/"/>
-      <property name="suffix" value=".jsp"/>
+        <property name="prefix" value="/WEB-INF/views/"/>
+        <property name="suffix" value=".jsp"/>
     </bean>
 
 </beans>

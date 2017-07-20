@@ -11,12 +11,6 @@
     <artifactId>spring-webmvc</artifactId>
     <version>4.3.9.RELEASE</version>
 </dependency>
-<!-- https://mvnrepository.com/artifact/org.aspectj/aspectjrt
-<dependency>
-    <groupId>org.aspectj</groupId>
-    <artifactId>aspectjrt</artifactId>
-    <version>1.8.0</version>
-</dependency> -->
 <!-- https://mvnrepository.com/artifact/org.aspectj/aspectjweaver -->
 <dependency>
     <groupId>org.aspectj</groupId>
@@ -34,6 +28,12 @@
     <groupId>com.fasterxml.jackson.core</groupId>
     <artifactId>jackson-databind</artifactId>
     <version>2.8.9</version>
+</dependency>
+<!-- https://mvnrepository.com/artifact/javax.servlet/jstl -->
+<dependency>
+    <groupId>javax.servlet</groupId>
+    <artifactId>jstl</artifactId>
+    <version>1.2</version>
 </dependency>
 
 </dependencies>
