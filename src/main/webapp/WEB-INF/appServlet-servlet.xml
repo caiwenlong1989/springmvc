@@ -18,7 +18,18 @@
         <mvc:message-converters>
             <!-- 使用 Jackson 2.x 的 ObjectMapper 读写 JSON 类型 HTTP信息 -->
             <!-- 默认情况下，该转换器支持 UTF-8 字符集的 application/json 和 application/*+json -->
-            <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"/>
+            <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+                <property name="objectMapper">
+                    <bean class="com.fasterxml.jackson.databind.ObjectMapper">
+                        <!-- 返回 JSON 日期时间格式化，日期时间分段交由前端处理 -->
+                        <property name="dateFormat">
+                            <bean class="java.text.SimpleDateFormat">
+                                <constructor-arg value="yyyy-MM-dd HH:mm:ss"/>
+                            </bean>
+                        </property>
+                    </bean>
+                </property>
+            </bean>
             <!-- 读写字符串类型 HTTP 信息 -->
             <!-- 默认情况下，该转换器支持所有媒体类型，写纯文本，默认字符集 ISO-8859-1 -->
             <bean class="org.springframework.http.converter.StringHttpMessageConverter">

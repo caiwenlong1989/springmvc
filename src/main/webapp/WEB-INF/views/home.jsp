@@ -17,6 +17,7 @@
     <tr><td><p>  <a id="3" class="textLink" href="<c:url value="requestBody?msg=这是请求中文"/>">请求中文信息</a> </p></td></tr>
     <tr><td><p>  <a id="4" class="textLink" href="<c:url value="responseBody"/>">响应中文信息</a> </p></td></tr>
     <tr><td><p>  <a id="5" class="textLink" href="<c:url value="responseJson"/>">响应JSON信息</a> </p></td></tr>
+    <tr><td><p>  <a id="6" class="textLink" href="<c:url value="findAllTableTestFromDB"/>">Spring+SpringMVC+MyBatis</a> </p></td></tr>
 </table>
 <script type="text/javascript" src="resources/jquery/jquery-3.2.1.min.js"></script>
 <script type="text/javascript">
