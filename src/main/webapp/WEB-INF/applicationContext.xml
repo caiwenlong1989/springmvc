@@ -19,7 +19,7 @@
         <property name="password" value="${password}" />
     </bean>
 
-    <!-- MyBatis SqlSession Bean 工厂 -->
+    <!-- MyBatis SqlSession BeanFactory -->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
         <property name="configLocation" value="classpath:mybatis-config.xml"/>
@@ -30,8 +30,16 @@
         <constructor-arg ref="sqlSessionFactory"/>
     </bean>
 
+    <!-- 注入 MyBatis 映射接口的 BeanFactory
+     <bean id="baseMapper" class="org.mybatis.spring.mapper.MapperFactoryBean" abstract="true" lazy-init="true">
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+     </bean> -->
+
+    <!-- 扫描指定包路径下的映射器并自动将它们创建成 MapperFactoryBean -->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="basePackage" value="com.kongzhu.demo.springmvc.mapper"/>
+        <!-- 可选项，当定义多个 Session BeanFactory 时需要指定
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" /> -->
     </bean>
 
 </beans>
