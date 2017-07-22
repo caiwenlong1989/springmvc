@@ -1,13 +1,18 @@
-package com.kongzhu.demo.springmvc;
+package com.kongzhu.demo.springmvc.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.kongzhu.demo.springmvc.model.TableTest;
+import com.kongzhu.demo.springmvc.service.TableTestService;
 
 @Controller
 public class SimpleController {
@@ -50,5 +55,14 @@ public class SimpleController {
         map.put("success", true);
         map.put("msg", "操作成功");
         return map;
+    }
+
+    @Autowired
+    private TableTestService tableTestService;
+
+    @RequestMapping("/findAllTableTestFromDB")
+    public @ResponseBody List<TableTest> findAll() {
+        List<TableTest> list = tableTestService.findAll();
+        return list;
     }
 }

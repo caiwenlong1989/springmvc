@@ -1,4 +1,4 @@
-package com.kongzhu.demo.springmvc;
+package com.kongzhu.demo.springmvc.controller;
 
 import java.text.DateFormat;
 import java.util.Date;
