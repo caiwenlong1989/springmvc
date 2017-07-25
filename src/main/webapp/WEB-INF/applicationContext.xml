@@ -2,18 +2,25 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:tx="http://www.springframework.org/schema/tx"
     xsi:schemaLocation="
         http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/context
-        http://www.springframework.org/schema/context/spring-context.xsd">
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+    <!-- 因为需要在Service实现类中使用@Transactional将事务交由Spring管理，
+         所以需要将controller和service分开扫描，先service，后事务，再controller -->
+    <context:component-scan base-package="com.kongzhu.demo.springmvc.service"/>
 
     <!-- 通过在应用上下文内注册 PropertySourcesPlaceholderConfigurer，激活 ${…} 占位符替换 -->
     <context:property-placeholder location="classpath:jdbc.properties"/>
 
     <!-- Druid 数据源 -->
     <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
-        <property name="driverClassName" value="${driverClassName}" />
+        <property name="driverClassName" value="${driver}" />
         <property name="url" value="${url}" />
         <property name="username" value="${username}" />
         <property name="password" value="${password}" />
@@ -22,7 +29,14 @@
     <!-- MyBatis SqlSession BeanFactory -->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
-        <property name="configLocation" value="classpath:mybatis-config.xml"/>
+        <property name="configuration">
+            <bean class="org.apache.ibatis.session.Configuration">
+                <!-- 开启自动映射：从典型的数据库字段名 A_COLUMN 到典型的驼峰标识Java属性名 aColumn -->
+                <property name="mapUnderscoreToCamelCase" value="true"/>
+            </bean>
+        </property>
+        <property name="typeAliasesPackage" value="com.kongzhu.demo.springmvc.model"/>
+        <property name="typeHandlersPackage" value="com.kongzhu.demo.springmvc.handler"/>
     </bean>
 
     <!-- MyBatis SqlSession -->
@@ -41,5 +55,13 @@
         <!-- 可选项，当定义多个 Session BeanFactory 时需要指定
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" /> -->
     </bean>
+
+    <!-- 配置事务管理器 -->
+    <bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <constructor-arg ref="dataSource"/>
+     </bean>
+
+    <!-- 配置注解驱动的事务 -->
+    <tx:annotation-driven transaction-manager="txManager"/>
 
 </beans>

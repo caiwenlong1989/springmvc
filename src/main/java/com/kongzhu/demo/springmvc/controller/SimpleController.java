@@ -30,7 +30,7 @@ public class SimpleController {
      * @return
      */
     @RequestMapping("/requestBody")
-    public @ResponseBody String requestBody(Locale locale, Model model, String msg) {
+    public @ResponseBody String requestBody(String msg) {
         System.out.printf("请求参数msg内容是：%s\n", msg);
         return msg;
     }
@@ -40,7 +40,7 @@ public class SimpleController {
      * @return
      */
     @RequestMapping("/responseBody")
-    public @ResponseBody String responseBody(Locale locale, Model model) {
+    public @ResponseBody String responseBody() {
         return "这是响应中文";
     }
 

@@ -7,10 +7,12 @@
     <filter-name>characterEncodingFilter</filter-name>
     <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
     <init-param>
+      <!-- 设置请求字符编码 -->
       <param-name>encoding</param-name>
       <param-value>UTF-8</param-value>
     </init-param>
     <init-param>
+      <!-- 在任何情况下都使用指定的字符编码，并作为响应的默认字符编码 -->
       <param-name>forceEncoding</param-name>
       <param-value>true</param-value>
     </init-param>
@@ -31,6 +33,7 @@
   <servlet>
     <servlet-name>appServlet</servlet-name>
     <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+    <!-- 在 Web 应用启动时就加载该 Servlet -->
     <load-on-startup>1</load-on-startup>
   </servlet>
   

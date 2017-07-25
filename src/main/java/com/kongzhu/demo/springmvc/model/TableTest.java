@@ -4,14 +4,26 @@ import java.util.Date;
 
 import com.kongzhu.demo.springmvc.enumeration.TableTestSex;
 
+/**
+ * table_test 表对应的实体类
+ * @author caiwenlong
+ */
 public class TableTest {
+    /** 唯一标识，对应表字段 ID（表主键） */
     private Integer id;
+    /** 姓名，对应表字段 NAME */
     private String name;
+    /** 性别，对应表字段 SEX */
     private TableTestSex sex;
+    /** 年龄，对应表字段 AGE */
     private Integer age;
+    /** 出生年月，对应表字段 BIRTHDAY */
     private Date birthday;
+    /** 登录密码，对应表字段 PASSWORD */
     private String password;
+    /** 入职日期，对应表字段 HIRE_DATE */
     private Date hireDate;
+    /** 离职标识，对应表字段 DELETED */
     private Boolean deleted;
     public Integer getId() {
         return id;

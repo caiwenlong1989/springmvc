@@ -11,6 +11,10 @@ import org.apache.ibatis.type.MappedJdbcTypes;
 
 import com.kongzhu.demo.springmvc.enumeration.TableTestSex;
 
+/**
+ * table_test 表中 sex 字段 跟 TableTest 实体类中 sex 属性的类型映射处理器
+ * @author caiwenlong
+ */
 @MappedJdbcTypes(JdbcType.TINYINT)
 public class TableTestSexHandler extends BaseTypeHandler<TableTestSex> {
 

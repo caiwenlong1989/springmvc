@@ -1,5 +1,9 @@
 package com.kongzhu.demo.springmvc.enumeration;
 
+/**
+ * TableTest 实体类中 sex 属性的枚举类
+ * @author caiwenlong
+ */
 public enum TableTestSex {
     女((byte) 0),
     男((byte) 1),

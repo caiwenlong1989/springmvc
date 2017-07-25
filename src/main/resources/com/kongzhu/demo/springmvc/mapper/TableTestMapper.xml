@@ -5,6 +5,7 @@
 <mapper namespace="com.kongzhu.demo.springmvc.mapper.TableTestMapper">
 
     <resultMap type="tableTest" id="BaseResultMap">
+        <!-- 该字段需要单独配置类型处理器 -->
         <result column="sex" property="sex" typeHandler="com.kongzhu.demo.springmvc.handler.TableTestSexHandler"/>
     </resultMap>
 
