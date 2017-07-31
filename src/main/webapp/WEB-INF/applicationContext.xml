@@ -20,10 +20,10 @@
 
     <!-- Druid 数据源 -->
     <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
-        <property name="driverClassName" value="${driver}" />
-        <property name="url" value="${url}" />
-        <property name="username" value="${username}" />
-        <property name="password" value="${password}" />
+        <property name="driverClassName" value="${jdbc.driverClassName}" />
+        <property name="url" value="${jdbc.url}" />
+        <property name="username" value="${jdbc.username}" />
+        <property name="password" value="${jdbc.password}" />
     </bean>
 
     <!-- MyBatis SqlSession BeanFactory -->
@@ -33,6 +33,7 @@
             <bean class="org.apache.ibatis.session.Configuration">
                 <!-- 开启自动映射：从典型的数据库字段名 A_COLUMN 到典型的驼峰标识Java属性名 aColumn -->
                 <property name="mapUnderscoreToCamelCase" value="true"/>
+                <property name="logImpl" value="LOG4J"/>
             </bean>
         </property>
         <property name="typeAliasesPackage" value="com.kongzhu.demo.springmvc.model"/>
