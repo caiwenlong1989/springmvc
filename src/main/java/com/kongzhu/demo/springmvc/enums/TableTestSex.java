@@ -1,4 +1,4 @@
-package com.kongzhu.demo.springmvc.enumeration;
+package com.kongzhu.demo.springmvc.enums;
 
 /**
  * TableTest 实体类中 sex 属性的枚举类

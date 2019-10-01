@@ -2,7 +2,7 @@ package com.kongzhu.demo.springmvc.model;
 
 import java.util.Date;
 
-import com.kongzhu.demo.springmvc.enumeration.TableTestSex;
+import com.kongzhu.demo.springmvc.enums.TableTestSex;
 
 /**
  * table_test 表对应的实体类
